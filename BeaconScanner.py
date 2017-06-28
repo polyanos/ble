@@ -21,7 +21,9 @@ class BeaconScanner():
         self.keepScanning = True
         self.rounds = 0
 
-    def StartScanning(self):
+
+    def StartScanning(self,callback):
+        self.scanner.withDelegate(callback)
         while self.keepScanning and self.rounds < 20:
             self.rounds += 1
             print "Beginning round " + str(self.rounds)
@@ -39,4 +41,4 @@ class BeaconScanner():
 
 
 scanner = BeaconScanner(0)
-scanner.StartScanning()
+scanner.StartScanning(BeaconDiscoveryHandler(scanner.ProcessDiscovery))
