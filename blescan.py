@@ -128,7 +128,6 @@ def parse_events(sock, time_span):
             pkt = pkt[4:]
             if subevent == EVT_LE_CONN_COMPLETE:
                 i = 0
-                # le_handle_connection_complete(pkt)
             elif subevent == EVT_LE_ADVERTISING_REPORT:
                 # print "advertising report"
                 num_reports = struct.unpack("B", pkt[0])[0]
@@ -137,7 +136,7 @@ def parse_events(sock, time_span):
                     # build the return string
                     Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
                     Adstring += ","
-                    Adstring += returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
+                    Adstring += returnstringpacket(pkt[9: 24])
                     Adstring += ","
                     Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
                     Adstring += ","
