@@ -53,7 +53,7 @@ class BeaconScanner():
         total = 0
         for item in rssiList:
             total += (item * -1)
-        return total/rssiList.len()
+        return total/len(rssiList)
 
 
 def FinishedCallback(data):
