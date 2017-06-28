@@ -28,13 +28,15 @@ class BeaconScanner():
             self.rounds += 1
             print "Beginning round " + str(self.rounds)
             self.scanner.scan(2)
-            print "Ending round " + str(self.rounds)
+            print "Ending round " + str(self.rounds) + ". Found beacons:"
+            for key, value in self.beaconList.items():
+                print "Found beacon - Address: " + key + "; Signal Strength: " + \
+                      str(value) + "dbm;"
 
     def StopScanning(self):
         return False  # TODO
 
     def ProcessDiscovery(self, scanEntry, isNewDev, isNewData):
-        print "Found beacon - Address: " + str(scanEntry.addr) + "; Signal Strength: " + str(scanEntry.rssi) + "dbm;"
         self.beaconList[scanEntry.addr] = [scanEntry.getValueText(9), scanEntry.rssi]
 
 
