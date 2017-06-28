@@ -136,7 +136,7 @@ def parse_events(sock, time_span):
                     # build the return string
                     Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
                     Adstring += ","
-                    Adstring += returnstringpacket(pkt[9: 24])
+                    Adstring += returnstringpacket(pkt[24: 9])
                     Adstring += ","
                     Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
                     Adstring += ","
