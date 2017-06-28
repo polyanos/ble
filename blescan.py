@@ -139,8 +139,8 @@ def parse_events(sock, time_span):
                     beacon.uuid = returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
                     beacon.major = returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
                     beacon.minor = returnnumberpacket(pkt[report_pkt_offset - 4: report_pkt_offset - 2])
-                    beacon.tranp = struct.unpack("b", pkt[report_pkt_offset - 2])
-                    beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])
+                    beacon.tranp = returnnumberpacket(pkt[report_pkt_offset - 2])
+                    beacon.rssi = returnnumberpacket(pkt[report_pkt_offset - 1])
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
                     # Debug
