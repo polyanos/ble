@@ -10,7 +10,7 @@ class BeaconScanner():
         result = blescan.start_scan(sock, timespan, beacon_filter)
 
         for k, v in result.items():
-            print v[0].uuid
+            print(v[0].uuid)
 
         return False
 
