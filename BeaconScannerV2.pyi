@@ -10,4 +10,4 @@ class BeaconScanner():
         blescan.parse_events(sock, timespan)
 
 scanner = BeaconScanner(0)
-scanner.scan_for_time(500)
+scanner.scan_for_time(1000)
