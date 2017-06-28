@@ -52,7 +52,7 @@ class BeaconScanner():
 
 def FinishedCallback(data):
     for key, value in data.items():
-        print key + " " + value
+        print key + " " + str(value)
     return False  # TODO
 
 scanner = BeaconScanner(0)
