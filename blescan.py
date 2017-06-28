@@ -145,7 +145,7 @@ def parse_events(sock, time_span):
                     Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset - 2])
                     Adstring += ","
                     Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset - 1])
-                    print returnstringpacket(pkt[-26 : -23])
+                    print returnstringpacket(pkt[-26 : -22])
                     myFullList.append(Adstring)
 
     # Restore previous filter
