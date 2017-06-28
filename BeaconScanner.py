@@ -44,7 +44,10 @@ class BeaconScanner():
         return False  # TODO
 
     def ProcessDiscovery(self, scanEntry, isNewDev, isNewData):
-        self.rawBeaconRssiData[scanEntry.addr].append(scanEntry.rssi)
+        if scanEntry.addr in self.rawBeaconRssiData:
+            self.rawBeaconRssiData[scanEntry.addr].append(scanEntry.rssi)
+        else:
+            self.rawBeaconRssiData[scanEntry.addr] = [scanEntry.rssi]
 
     def CalculateAverage(self, rssiList):
         total = 0
