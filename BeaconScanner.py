@@ -27,9 +27,7 @@ class BeaconScanner():
         while self.keepScanning and self.rounds < 20:
             self.rounds += 1
             print "Beginning round " + str(self.rounds)
-            self.scanner.start()
-            self.scanner.process(2)
-            self.scanner.stop()
+            self.scanner.scan(2)
             print "Ending round " + str(self.rounds)
 
     def StopScanning(self):
