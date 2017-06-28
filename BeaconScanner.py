@@ -1,5 +1,4 @@
-#!/bin/sh
-from bluepy.btle import UUID, Peripheral, Scanner, ScanEntry, DefaultDelegate
+from bluepy.btle import Scanner, DefaultDelegate
 
 
 class BeaconDiscoveryHandler(DefaultDelegate):
@@ -39,7 +38,7 @@ class BeaconScanner():
 
     def ProcessDiscovery(self, scanEntry, isNewDev, isNewData):
         print scanEntry.addr
-        
+
         if scanEntry.addr in self.rawBeaconRssiData:
             self.rawBeaconRssiData[scanEntry.addr].append(scanEntry.rssi)
         else:
