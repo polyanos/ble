@@ -17,7 +17,8 @@ class BeaconScanner():
 
 
 def beacon_filter(beacon):
-    if beacon._manf == "cdab0215":
+    print("Value " + beacon.manf + " VS cdab0215")
+    if beacon.manf == "cdab0215":
         return True
     else:
         return False
