@@ -136,7 +136,7 @@ def parse_events(sock, time_span):
                     # build the return string
                     Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
                     Adstring += ","
-                    Adstring += returnstringpacket(pkt[24: 9])
+                    Adstring += returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
                     Adstring += ","
                     Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
                     Adstring += ","
@@ -145,7 +145,7 @@ def parse_events(sock, time_span):
                     Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset - 2])
                     Adstring += ","
                     Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset - 1])
-                    print Adstring
+                    print returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
                     myFullList.append(Adstring)
 
     # Restore previous filter
