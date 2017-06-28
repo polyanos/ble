@@ -36,7 +36,7 @@ class BeaconScanner():
         return False  # TODO
 
     def ProcessDiscovery(self, scanEntry, isNewDev, isNewData):
-        print str(scanEntry.addr) + " " + str(scanEntry.rssi)
+        print "Found beacon - Address: " + str(scanEntry.addr) + "; Signal Strength: " + str(scanEntry.rssi) + "dbm;"
         self.beaconList[scanEntry.addr] = [scanEntry.getValueText(9), scanEntry.rssi]
 
 
