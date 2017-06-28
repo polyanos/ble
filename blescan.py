@@ -144,7 +144,7 @@ def parse_events(sock, time_span):
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
                     # Debug
-                    print beacon.uuid + " , " + str(beacon.major) + " , " + str(beacon.minor) + " , " + beacon.manf + " , " + beacon.rssi
+                    print beacon.uuid + " , " + str(beacon.major) + " , " + str(beacon.minor) + " , " + beacon.manf + " , " + str(beacon.rssi)
                     beacon_list.append(beacon)
 
     # Restore previous filter
