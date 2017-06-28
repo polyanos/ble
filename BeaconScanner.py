@@ -17,28 +17,44 @@ class BeaconDiscoveryHandler(DefaultDelegate):
 class BeaconScanner():
     def __init__(self, hciInt):
         self.beaconList = {}
+        self.rawBeaconRssiData = {}
         self.scanner = Scanner(hciInt)
         self.keepScanning = True
         self.rounds = 0
 
-
-    def StartScanning(self,callback):
-        self.scanner.withDelegate(callback)
+    def StartScanning(self,discoveryCallback, scanFinishedCallback):
+        self.scanner.withDelegate(discoveryCallback)
         while self.keepScanning and self.rounds < 20:
+            self.rawBeaconRssiData = {}
             self.rounds += 1
             print "Beginning round " + str(self.rounds)
+
             self.scanner.scan(2)
+
             print "Ending round " + str(self.rounds) + ". Found beacons:"
-            for key, value in self.beaconList.items():
+
+            for key, value in self.rawBeaconRssiData.items():
+                average = self.CalculateAverage(value)
+                self.beaconList[key] = average
                 print "Found beacon - Address: " + key + "; Signal Strength: " + \
-                      str(value) + "dbm;"
+                      str(average) + "dbm;"
+            scanFinishedCallback(self.beaconList)
 
     def StopScanning(self):
         return False  # TODO
 
     def ProcessDiscovery(self, scanEntry, isNewDev, isNewData):
-        self.beaconList[scanEntry.addr] = scanEntry.rssi
+        self.rawBeaconRssiData[scanEntry.addr].append(scanEntry.rssi)
 
+    def CalculateAverage(self, rssiList):
+        total = 0
+        for item in rssiList:
+            total += (item * -1)
+        return total/rssiList.len()
+
+
+def FinishedCallback(data):
+    return False
 
 scanner = BeaconScanner(0)
-scanner.StartScanning(BeaconDiscoveryHandler(scanner.ProcessDiscovery))
+scanner.StartScanning(BeaconDiscoveryHandler(scanner.ProcessDiscovery), FinishedCallback)
