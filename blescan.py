@@ -19,6 +19,7 @@ import sys
 import struct
 import bluetooth._bluetooth as bluez
 import time
+from beacon import Beacon
 
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
@@ -99,7 +100,7 @@ def hci_toggle_le_scan(sock, enable):
     
 def parse_events(sock, time_span):
     old_filter = sock.getsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, 14)
-    myFullList = []
+    beacon_list = []
 
     # perform a device inquiry on bluetooth device #0
     # The inquiry should last 8 * 1.28 = 10.24 seconds
@@ -133,22 +134,20 @@ def parse_events(sock, time_span):
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
                 for i in range(0, num_reports):
+                    beacon = Beacon()
                     # build the return string
-                    Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
-                    Adstring += ","
-                    Adstring += returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
-                    Adstring += ","
-                    Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
-                    Adstring += ","
-                    Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset - 4: report_pkt_offset - 2])
-                    Adstring += ","
-                    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset - 2])
-                    Adstring += ","
-                    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset - 1])
-                    print returnstringpacket(pkt[-26 : -22])
-                    myFullList.append(Adstring)
+                    beacon.uuid = returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
+                    beacon.major = returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
+                    beacon.minor = returnnumberpacket(pkt[report_pkt_offset - 4: report_pkt_offset - 2])
+                    beacon.tranp = struct.unpack("b", pkt[report_pkt_offset - 2])
+                    beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])
+                    beacon.manf = returnstringpacket(pkt[-26 : -22])
+
+                    # Debug
+                    print beacon.uuid + " , " + str(beacon.major) + " , " + str(beacon.minor) + " , " + beacon.manf + " , " + str(beacon.rssi)
+                    beacon_list.append(beacon)
 
     # Restore previous filter
     sock.setsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, old_filter)
     hci_disable_le_scan(sock)
-    return myFullList
+    return beacon_list
