@@ -139,12 +139,12 @@ def parse_events(sock, time_span):
                     beacon.uuid = returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
                     beacon.major = returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
                     beacon.minor = returnnumberpacket(pkt[report_pkt_offset - 4: report_pkt_offset - 2])
-                    beacon.tranp = struct.unpack("b", pkt[report_pkt_offset - 2])
-                    beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])
+                    beacon.tranp = struct.unpack("b", pkt[report_pkt_offset - 2])[0]
+                    beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])[0]
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
                     # Debug
-                    print beacon.uuid + " , " + str(beacon.major) + " , " + str(beacon.minor) + " , " + beacon.manf + " , " + str(beacon.rssi[0])
+                    print beacon.uuid + " , " + str(beacon.major) + " , " + str(beacon.minor) + " , " + beacon.manf + " , " + str(beacon.rssi)
                     beacon_list.append(beacon)
 
     # Restore previous filter
