@@ -1,3 +1,4 @@
+#!/bin/sh
 from bluepy.btle import UUID, Peripheral, Scanner, ScanEntry, DefaultDelegate
 
 
