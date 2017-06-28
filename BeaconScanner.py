@@ -28,7 +28,7 @@ class BeaconScanner():
             self.rounds += 1
             print "Beginning round " + str(self.rounds)
             self.scanner.start()
-            self.scanner.process(1)
+            self.scanner.process(2)
             self.scanner.stop()
             print "Ending round " + str(self.rounds)
 
