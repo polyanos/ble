@@ -38,6 +38,8 @@ class BeaconScanner():
         return False  # TODO
 
     def ProcessDiscovery(self, scanEntry, isNewDev, isNewData):
+        print scanEntry.addr
+        
         if scanEntry.addr in self.rawBeaconRssiData:
             self.rawBeaconRssiData[scanEntry.addr].append(scanEntry.rssi)
         else:
