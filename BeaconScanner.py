@@ -19,12 +19,16 @@ class BeaconScanner():
         self.beaconList = {}
         self.scanner = Scanner(hciInt)
         self.keepScanning = True
+        self.rounds = 0
 
     def StartScanning(self):
-        while self.keepScanning:
+        while self.keepScanning and self.rounds < 20:
+            self.rounds += 1
+            print "Beginning round " + str(self.rounds)
             self.scanner.start()
             self.scanner.process(0.9)
             self.scanner.stop()
+            print "Ending round " + str(self.rounds)
 
     def StopScanning(self):
         return False  # TODO
