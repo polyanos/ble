@@ -18,7 +18,7 @@ class BeaconScanner():
     def _calculate_average_rssi(self, beacon_sub_list):
         total = 0
         for item in beacon_sub_list:
-            total += (item * -1)
+            total += (item.rssi * -1)
         return total/len(beacon_sub_list) * -1
 
     def _print_all_data(self, beacon_list):
