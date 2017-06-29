@@ -4,16 +4,18 @@ class BeaconScanner():
     def __init__(self, hci_number):
         self.hci_number = hci_number
 
-
     def scan_for_timespan(self, timespan):
         sock = blescan.hci_open_dev(self.hci_number)
         result = blescan.start_scan(sock, timespan, beacon_filter)
+        return_list = []
 
         self._print_all_data(result)
         for k, v in result.items():
-            print("average = " + str(self._calculate_average_rssi(v)))
+            temp = v[0]
+            temp.rssi = self._calculate_average_rssi(v)
+            return_list.append(temp)
 
-        return False
+        return return_list
 
     def _calculate_average_rssi(self, beacon_sub_list):
         total = 0
@@ -36,4 +38,6 @@ def beacon_filter(beacon):
         return False
 
 scanner = BeaconScanner(0)
-scanner.scan_for_timespan(1000)
+rlist = scanner.scan_for_timespan(1000)
+for a in rlist:
+    print(a)
