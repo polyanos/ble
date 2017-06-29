@@ -1,7 +1,15 @@
 import sys
+import math
 import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.BeaconScannerV2 import BeaconScanner
+
+def calculate_distance(beacon):
+    ratio = beacon.rssi * 1.0 / beacon.tranp
+    if ratio < 1.0:
+        return math.pow(ratio, 10)
+    else:
+        return (0.89976) * math.pow(ratio,7.7095) + 0.111
 
 scan_time_span = 1000
 hci_port_number = 0
@@ -30,6 +38,6 @@ while True:
 
     for item in result:
         print "Average rssi of " + item.uuid + " = " + str(item.rssi) + "dbm"
-        print "Estimated distance = " + str(10 ^ ((item.tranp - item.rssi)/20))
+        print "Estimated distance = " + str(calculate_distance(item))
 
     print ""
