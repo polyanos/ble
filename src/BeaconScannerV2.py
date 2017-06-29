@@ -26,10 +26,10 @@ class BeaconScanner():
 
     def _print_all_data(self, beacon_list):
         for k, v_list in beacon_list.items():
-            print("//" + k + "//")
+            print "//" + k + "//"
             for v in v_list:
-                print(v.manf + " - " + v.uuid + " - " + str(v.rssi))
-            print()
+                print v.manf + " - " + v.uuid + " - " + str(v.rssi)
+            print ""
 
 
 def beacon_filter(beacon):
