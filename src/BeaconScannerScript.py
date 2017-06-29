@@ -17,6 +17,6 @@ while True:
 
     for item in result:
         print "Average rssi of " + item.uuid + " = " + str(item.rssi) + "dbm"
-        print "Estimated distance = " + str(10 ^ ((item.tranp - item.RSSI)/20))
+        print "Estimated distance = " + str(10 ^ ((item.tranp - item.rssi)/20))
 
     print ""
