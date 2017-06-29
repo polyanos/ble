@@ -10,7 +10,7 @@ round_number = 0
 
 while True:
     round_number += 1
-    print "Starting round " + round_number
+    print "Starting round " + str(round_number)
     scanner.scan_for_timespan(scan_time_span)
-    print "Ending round "  + round_number
+    print "Ending round "  + str(round_number)
     print ""
