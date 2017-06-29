@@ -16,6 +16,7 @@ while True:
     print "Ending round "  + str(round_number)
 
     for item in result:
-        print "Average rssi of " + item.uuid + " is " + str(item.rssi) + "dbm"
+        print "Average rssi of " + item.uuid + " = " + str(item.rssi) + "dbm"
+        print "Estimated distance = " + str(10 ^ ((item.tranp - item.RSSI)/20))
 
     print ""
