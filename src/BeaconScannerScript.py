@@ -6,6 +6,8 @@ from src.BeaconScannerV2 import BeaconScanner
 scan_time_span = 1000
 hci_port_number = 0
 
+print len(sys.argv)
+
 if len(sys.argv) == 1:
     first_par = sys.argv[1]
     if not(first_par is None):
