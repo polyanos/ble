@@ -11,12 +11,12 @@ print len(sys.argv)
 if len(sys.argv) == 2:
     first_par = sys.argv[1]
     if not(first_par is None):
-        scan_time_span = first_par
+        scan_time_span = int(first_par)
 
 if len(sys.argv) == 3:
     second_par = sys.argv[2]
     if not(second_par is None):
-        hci_port_number = second_par
+        hci_port_number = int(second_par)
 
 scanner = BeaconScanner(hci_port_number)
 round_number = 0
