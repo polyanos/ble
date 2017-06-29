@@ -1,4 +1,5 @@
-import blescan
+from src import blescan
+
 
 class BeaconScanner():
     def __init__(self, hci_number):

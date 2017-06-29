@@ -1,4 +1,4 @@
-from BeaconScannerV2 import BeaconScanner
+from src.BeaconScannerV2 import BeaconScanner
 
 hci_port_number = 0
 scan_time_span = 1000
