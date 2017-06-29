@@ -36,8 +36,3 @@ def beacon_filter(beacon):
         return True
     else:
         return False
-
-scanner = BeaconScanner(0)
-rlist = scanner.scan_for_timespan(1000)
-for a in rlist:
-    print(a.uuid)
