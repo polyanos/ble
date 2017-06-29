@@ -3,8 +3,19 @@ import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.BeaconScannerV2 import BeaconScanner
 
-hci_port_number = 0
-scan_time_span = 1000
+first_par = sys.argv[1]
+second_par = sys.argv[2]
+
+if first_par is None:
+    scan_time_span = 1000
+else:
+    scan_time_span = int(first_par)
+
+if second_par is None:
+    hci_port_number = 0
+else:
+    hci_port_number = int(second_par)
+
 scanner = BeaconScanner(hci_port_number)
 round_number = 0
 result = []
