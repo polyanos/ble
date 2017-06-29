@@ -40,4 +40,4 @@ def beacon_filter(beacon):
 scanner = BeaconScanner(0)
 rlist = scanner.scan_for_timespan(1000)
 for a in rlist:
-    print(a)
+    print(a.uuid)
