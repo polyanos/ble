@@ -36,4 +36,4 @@ def beacon_filter(beacon):
         return False
 
 scanner = BeaconScanner(0)
-scanner.scan_for_time(1000)
+scanner.scan_for_timespan(1000)
