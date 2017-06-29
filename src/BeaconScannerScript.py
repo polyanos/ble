@@ -1,3 +1,6 @@
+import sys
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.BeaconScannerV2 import BeaconScanner
 
 hci_port_number = 0
