@@ -1,13 +1,41 @@
 # A list based of a Rolling List implementation which has a
 # user specified size and once reached that size will delete
 # the oldest element for a new one.
+import collections
 
 
-class BeaconList:
+class BeaconList(collections.Sequence):
     def __init__(self, size):
         self.size = size
         self.items = []
         self.index = 0
+
+    def __getitem__(self, index):
+        return super(BeaconList, self).__getitem__(index)
+
+    def __reversed__(self):
+        return self.items.__reversed__()
+
+    def __contains__(self, value):
+        self.items.__contains__(value)
+
+    def __len__(self):
+        return len(self.items)
+
+    def __iter__(self):
+        return self.items.__iter__()
+
+    def __str__(self):
+        string = ""
+        for val in self.items:
+            string += val + "\n"
+        return string
+
+    def index(self, value):
+        return super(BeaconList, self).index(value)
+
+    def count(self, value):
+        return super(BeaconList, self).count(value)
 
     def add(self, item):
         if len(self.items) < self.size:
@@ -18,18 +46,3 @@ class BeaconList:
             self.index = 0
             self.items[self.index] = item
         self.index += 1
-
-    def get(self, index):
-        if index >= self.size or index < 0:
-            raise IndexError("The specified index ({}) is bigger than the size of the list ({}) or the index is smaller than 0"
-                             .format(index, self.size))
-        return self.items[index]
-
-    def items(self):
-        return self.items
-
-    def __str__(self):
-        string = ""
-        for val in self.items:
-            string += val + "\n"
-        return string
