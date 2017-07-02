@@ -21,8 +21,8 @@ result = []
 while True:
     round_number += 1
     print "Starting round " + str(round_number)
-    result = scanner.scan_for_timespan(scan_time_span)
-    print "Ending round "  + str(round_number)
+    result = scanner.scan_for_time_span(scan_time_span)
+    print "Ending round " + str(round_number)
 
     for item in result:
         print "Average rssi of " + item.uuid + " = " + str(item.rssi) + "dbm"
