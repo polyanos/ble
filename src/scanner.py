@@ -99,7 +99,7 @@ def hci_toggle_le_scan(sock, enable):
     bluez.hci_send_cmd(sock, OGF_LE_CTL, OCF_LE_SET_SCAN_ENABLE, cmd_pkt)
 
     
-def start_scan(sock, time_span, filter_function):
+def start_scan(sock, time_span, filters):
     old_filter = sock.getsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, 14)
     beacon_list = {}
 
@@ -144,7 +144,7 @@ def start_scan(sock, time_span, filter_function):
                     beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])[0]
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
-                    for function in filter_function.items():
+                    for function in filters:
                         if function(beacon):
                             if beacon.uuid in beacon_list:
                                 beacon_list[beacon.uuid].add(beacon)
