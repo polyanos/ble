@@ -1,8 +1,7 @@
 import sys
 import math
-import os.path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.BeaconScannerV2 import BeaconScanner
+
 
 def calculate_distance(beacon):
     ratio = beacon.rssi * 1.0 / beacon.tranp
