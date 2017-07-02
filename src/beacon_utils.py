@@ -11,12 +11,12 @@ def calculate_distance(beacon):
 
 def calculate_average_rssi(beacon_list):
     total = 0
-    for item in beacon_list.items:
+    for item in beacon_list:
         total += (item.rssi * - 1)
     return total/len(beacon_list) * - 1
 
 
 def print_beacon_data(beacon_list):
-    for v in beacon_list.items():
+    for v in beacon_list:
         print v.manf + " - " + v.uuid + " - " + str(v.rssi)
     print ""
