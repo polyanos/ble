@@ -1,20 +1,9 @@
 import sys
-import math
-from src.BeaconScannerV2 import BeaconScanner
-
-
-def calculate_distance(beacon):
-    ratio = beacon.rssi * 1.0 / beacon.tranp
-    if ratio < 1.0:
-        return math.pow(ratio, 10)
-    else:
-        return (0.89976) * math.pow(ratio,7.7095) + 0.111
+import src.beacon_utils as bu
+from src.beacon_scanner import BeaconScanner
 
 scan_time_span = 1000
 hci_port_number = 0
-
-print len(sys.argv)
-
 if len(sys.argv) == 2:
     first_par = sys.argv[1]
     if not(first_par is None):
@@ -37,6 +26,6 @@ while True:
 
     for item in result:
         print "Average rssi of " + item.uuid + " = " + str(item.rssi) + "dbm"
-        print "Estimated distance = " + str(calculate_distance(item))
+        print "Estimated distance = " + str(bu.calculate_distance(item))
 
     print ""

@@ -1,3 +1,10 @@
+import struct
+import sys
+import time
+import bluetooth._bluetooth as bluez
+
+from src.model import beacon_model as _bm, beacon_list as _bl
+
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # JCS 06/07/14
 
@@ -14,14 +21,6 @@ DEBUG = False
 
 # NOTE: Python's struct.pack() will add padding bytes unless you make the endianness explicit. Little endian
 # should be used for BLE. Always start a struct.pack() format string with "<"
-
-import struct
-import sys
-import time
-
-import bluetooth._bluetooth as bluez
-
-from src.model.beacon import Beacon
 
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
@@ -136,7 +135,7 @@ def start_scan(sock, time_span, filter_function):
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
                 for i in range(0, num_reports):
-                    beacon = Beacon()
+                    beacon = _bm.Beacon()
                     # build the return string
                     beacon.uuid = returnstringpacket(pkt[report_pkt_offset - 22: report_pkt_offset - 6])
                     beacon.major = returnnumberpacket(pkt[report_pkt_offset - 6: report_pkt_offset - 4])
@@ -147,9 +146,9 @@ def start_scan(sock, time_span, filter_function):
 
                     if filter_function(beacon):
                         if beacon.uuid in beacon_list:
-                            beacon_list[beacon.uuid].append(beacon)
+                            beacon_list[beacon.uuid].add(beacon)
                         else:
-                            beacon_list[beacon.uuid] = [beacon]
+                            beacon_list[beacon.uuid] = _bl.BeaconList(10)
     # Restore previous filter
     sock.setsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, old_filter)
     hci_disable_le_scan(sock)

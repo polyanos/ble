@@ -1,4 +1,4 @@
-class Beacon ():
+class Beacon:
     def __init__(self):
         self._uuid = ""
         self._manf = ""
@@ -9,19 +9,18 @@ class Beacon ():
 
     def __str__(self):
         return ("uuid: " + self._uuid +
-               "; manf: " + self._manf +
-               "; tranp: " + self._tranp +
-               "; rssi: " + self._rssi +
-               "; major: " + self._major +
-               "; minor: " + self._minor)
-
+                "; manf: " + self._manf +
+                "; tranp: " + self._tranp +
+                "; rssi: " + self._rssi +
+                "; major: " + self._major +
+                "; minor: " + self._minor)
 
     @property
     def uuid(self):
         return self._uuid
 
     @uuid.setter
-    def uuid(self,uuid):
+    def uuid(self, uuid):
         self._uuid = uuid
 
     @property
