@@ -152,7 +152,6 @@ def start_scan(sock, time_span, filters):
 
                     for filter_function in filters:
                         if filter_function(beacon):
-                            print "Found" + str(beacon)
                             if beacon.uuid in beacon_list:
                                 beacon_list[beacon.uuid].add(beacon)
                             else:
