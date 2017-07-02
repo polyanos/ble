@@ -2,7 +2,7 @@ import sys
 import src.beacon_utils as bu
 from src.beacon_scanner import BeaconScanner
 
-scan_time_span = 1000
+scan_time_span = 2000
 hci_port_number = 0
 if len(sys.argv) == 2:
     first_par = sys.argv[1]

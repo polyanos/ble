@@ -56,9 +56,6 @@ def returnnumberpacket(pkt):
         multiple = 1
     return myInteger
 
-def default_filer(beacon):
-    return True
-
 
 def returnstringpacket(pkt):
     myString = ""
@@ -102,12 +99,9 @@ def hci_toggle_le_scan(sock, enable):
     bluez.hci_send_cmd(sock, OGF_LE_CTL, OCF_LE_SET_SCAN_ENABLE, cmd_pkt)
 
     
-def start_scan(sock, time_span, filters):
+def start_scan(sock, time_span, callback):
     old_filter = sock.getsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, 14)
     beacon_list = {}
-
-    if len(filters) == 0:
-        filters.append(default_filer)
 
     # perform a device inquiry on bluetooth device #0
     # The inquiry should last 8 * 1.28 = 10.24 seconds
@@ -150,13 +144,7 @@ def start_scan(sock, time_span, filters):
                     beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])[0]
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
-                    for filter_function in filters:
-                        if filter_function(beacon):
-                            if beacon.uuid in beacon_list:
-                                beacon_list[beacon.uuid].add(beacon)
-                            else:
-                                beacon_list[beacon.uuid] = _bl.BeaconList(10)
-                            break
+                    callback(beacon)
 
     # Restore previous filter
     sock.setsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, old_filter)
