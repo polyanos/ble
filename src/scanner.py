@@ -54,7 +54,10 @@ def returnnumberpacket(pkt):
     for c in pkt:
         myInteger +=  struct.unpack("B",c)[0] * multiple
         multiple = 1
-    return myInteger 
+    return myInteger
+
+def default_filer(beacon):
+    return True
 
 
 def returnstringpacket(pkt):
@@ -102,6 +105,9 @@ def hci_toggle_le_scan(sock, enable):
 def start_scan(sock, time_span, filters):
     old_filter = sock.getsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, 14)
     beacon_list = {}
+
+    if len(filters) == 0:
+        filters.append(default_filer)
 
     # perform a device inquiry on bluetooth device #0
     # The inquiry should last 8 * 1.28 = 10.24 seconds
