@@ -11,13 +11,10 @@ class BeaconList(collections.Sequence):
         self.index = 0
 
     def __getitem__(self, index):
-        return super(BeaconList, self).__getitem__(index)
-
-    def __reversed__(self):
-        return self.items.__reversed__()
+        return self.items[index]
 
     def __contains__(self, value):
-        self.items.__contains__(value)
+        return self.items.__contains__(value)
 
     def __len__(self):
         return len(self.items)
