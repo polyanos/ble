@@ -144,7 +144,7 @@ def start_scan(sock, time_span, filter_function):
                     beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])[0]
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
-                    for function in filter_function.items:
+                    for function in filter_function.items():
                         if function(beacon):
                             if beacon.uuid in beacon_list:
                                 beacon_list[beacon.uuid].add(beacon)
