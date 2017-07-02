@@ -144,11 +144,14 @@ def start_scan(sock, time_span, filter_function):
                     beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])[0]
                     beacon.manf = returnstringpacket(pkt[-26 : -22])
 
-                    if filter_function(beacon):
-                        if beacon.uuid in beacon_list:
-                            beacon_list[beacon.uuid].add(beacon)
-                        else:
-                            beacon_list[beacon.uuid] = _bl.BeaconList(10)
+                    for function in filter_function.items:
+                        if function(beacon):
+                            if beacon.uuid in beacon_list:
+                                beacon_list[beacon.uuid].add(beacon)
+                            else:
+                                beacon_list[beacon.uuid] = _bl.BeaconList(10)
+                            break
+
     # Restore previous filter
     sock.setsockopt(bluez.SOL_HCI, bluez.HCI_FILTER, old_filter)
     hci_disable_le_scan(sock)
