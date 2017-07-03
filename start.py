@@ -43,3 +43,4 @@ if len(sys.argv) == 3:
         hci_port_number = int(second_par)
 
 main = Main(scan_time_span, hci_port_number)
+main.start_program()
