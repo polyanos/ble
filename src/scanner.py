@@ -141,6 +141,7 @@ class LowLevelScanner(Thread):
                         beacon.rssi = struct.unpack("b", pkt[report_pkt_offset - 1])[0]
                         beacon.manf = self.returnstringpacket(pkt[-26 : -22])
 
+                        print str(beacon)
                         self.callback(beacon)
 
         # Restore previous filter
