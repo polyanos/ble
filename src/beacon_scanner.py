@@ -35,7 +35,7 @@ class BeaconScanner(Thread):
 
     def on_discovery(self, beacon):
         if self.beacon_satisfy_filter(beacon):
-            print "Added beacon {} with tx-power of {} and rssi of {}".format(beacon.uuid, beacon.tranp, beacon.rssi)
+            # print "Added beacon {} with tx-power of {} and rssi of {}".format(beacon.uuid, beacon.tranp, beacon.rssi)
             if beacon.uuid in self.beacon_list:
                 self.beacon_list[beacon.uuid].add(beacon)
             else:
