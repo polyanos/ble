@@ -14,7 +14,7 @@ class Main:
         result = scanner.start()
         self.wait_for_input()
         scanner.stop_scanning()
-        scanner.join()
+        scanner.join(10)
 
     def on_result(self, beacon_list):
         self.round_number += 1

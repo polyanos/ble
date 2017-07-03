@@ -27,7 +27,7 @@ class BeaconScanner(Thread):
             self.on_time_elapsed()
 
         scanner.stop()
-        scanner.join()
+        scanner.join(10)
 
 
 
