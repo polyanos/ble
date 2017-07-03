@@ -30,6 +30,7 @@ class BeaconScanner(Thread):
         scanner.join()
 
 
+
     # Adds a filtering function to the scanner, the function should accept a Beacon object and return a boolean
     def add_filter(self, filter_function):
         self.filters.append(filter_function)
@@ -70,7 +71,9 @@ class BeaconScanner(Thread):
             return True
 
     def run(self):
+        print "Starting scanner"
         self.scan_for_beacons()
+        print "Stopping scanner"
 
     def stop_scanning(self):
         self.is_scanning = False

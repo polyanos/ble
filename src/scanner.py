@@ -148,7 +148,9 @@ class LowLevelScanner(Thread):
         self.hci_disable_le_scan(sock)
 
     def run(self):
+        print "Starting low level scanner"
         self.start_scan()
+        print "Stopping low level scanner"
 
     def stop(self):
         self.is_scanning = False

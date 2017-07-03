@@ -9,6 +9,7 @@ class Main:
         self.hci_port_number = hci_port_number
 
     def start_program(self):
+        print "Starting program"
         scanner = BeaconScanner(self.hci_port_number, self.time_span, self.on_result)
         result = scanner.start()
         self.wait_for_input()
