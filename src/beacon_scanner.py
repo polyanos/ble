@@ -18,16 +18,14 @@ class BeaconScanner(Thread):
         self.callback = callback
         self.is_scanning = True
 
+        self.scanner = LowLevelScanner(self.hci_number, self.on_discovery)
+
     def scan_for_beacons(self):
-        scanner = LowLevelScanner(0, self.on_discovery)
-        scanner.start()
+        self.scanner.start()
 
         while self.is_scanning:
             time.sleep(self.time_span / 1000.0)
             self.on_time_elapsed()
-
-        scanner.stop()
-        scanner.join(10)
 
 
 
@@ -73,4 +71,7 @@ class BeaconScanner(Thread):
         print "Stopping scanner"
 
     def stop_scanning(self):
+        print "Stop command for scanner received"
+        self.scanner.stop()
+        self.scanner.join(10)
         self.is_scanning = False

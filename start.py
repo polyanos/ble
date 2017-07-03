@@ -12,9 +12,13 @@ class Main:
         print "Starting program"
         scanner = BeaconScanner(self.hci_port_number, self.time_span, self.on_result)
         result = scanner.start()
-        self.wait_for_input()
-        scanner.stop_scanning()
-        scanner.join(10)
+        try:
+            self.wait_for_input()
+        except KeyboardInterrupt:
+            print "User interrupted the program, exiting..."
+        finally:
+            scanner.stop_scanning()
+            scanner.join(10)
 
     def on_result(self, beacon_list):
         self.round_number += 1

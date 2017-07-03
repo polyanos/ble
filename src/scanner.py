@@ -154,4 +154,5 @@ class LowLevelScanner(Thread):
         print "Stopping low level scanner"
 
     def stop(self):
+        print "Stop command for low level scanner received"
         self.is_scanning = False
