@@ -41,6 +41,6 @@ def filter_extremes(beacon_list, meta_data):
         if beacon.rssi < limit:
             print "deleting beacon" + str(beacon_list[i].uuid)
             del(beacon_list, i)
-        i += 1
+        i = i + 1
 
     return beacon_list
