@@ -2,6 +2,12 @@ import sys
 import src.beacon_utils as bu
 from src.beacon_scanner import BeaconScanner
 
+def beacon_filter(beacon):
+    if beacon.manf == "cdab0215":
+        return True
+    else:
+        return False
+
 class Main:
     def __init__(self, time_span, hci_port_number):
         self.round_number = 0
@@ -11,7 +17,8 @@ class Main:
     def start_program(self):
         print "Starting program"
         scanner = BeaconScanner(self.hci_port_number, self.time_span, self.on_result)
-        result = scanner.start()
+        scanner.add_filter(beacon_filter)
+        scanner.start()
         try:
             self.wait_for_input()
         except KeyboardInterrupt:
