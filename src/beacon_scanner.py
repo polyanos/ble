@@ -57,7 +57,7 @@ class BeaconScanner(Thread):
         self.callback(return_list)
 
     def beacon_satisfy_filter(self, beacon):
-        if len(self.filters) > 1:
+        if len(self.filters) > 0:
             for filter_function in self.filters:
                 if filter_function(beacon):
                     return True
