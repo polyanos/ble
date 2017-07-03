@@ -8,12 +8,12 @@ class Beacon:
         self._minor = ""
 
     def __str__(self):
-        return ("uuid: " + self._uuid +
-                "; manf: " + self._manf +
-                "; tranp: " + self._tranp +
-                "; rssi: " + self._rssi +
-                "; major: " + self._major +
-                "; minor: " + self._minor)
+        return ("uuid: " + str(self._uuid) +
+                "; manf: " + str(self._manf) +
+                "; tranp: " + str(self._tranp) +
+                "; rssi: " + str(self._rssi) +
+                "; major: " + str(self._major) +
+                "; minor: " + str(self._minor))
 
     @property
     def uuid(self):
