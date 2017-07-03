@@ -33,14 +33,14 @@ def calculate_rssi_sd(beacon_list, mean, is_sample):
         return math.sqrt(temp / len(beacon_list))
 
 
-def filter_extremes(beacon_list, meta_data):
+def filter_extremes(list, meta_data):
     limit = meta_data.rssi_mean - meta_data.rssi_sd
     index = 0
 
-    for beacon in beacon_list.items:
+    for beacon in list:
         if beacon.rssi < limit:
-            del(beacon_list[index])
+            del(list[index])
 
         index += 1
 
-    return beacon_list
+    return list
