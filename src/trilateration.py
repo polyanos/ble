@@ -1,10 +1,9 @@
 # From https://github.com/dvalenza/Trilateration-Example/blob/master/trilaterate.py
 
-import math
-import numpy
-import turtle
 import time
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 
 
 def getlocation(xA, yA, zA, xB, yB, zB, xC, yC, zC):
