@@ -1,5 +1,5 @@
 from src import scanner, beacon_utils
-from src.model import beacon_list as _bl
+from src.model import beacon_list as _bl, beacon_meta_data as _bmd
 
 
 class BeaconScanner:
@@ -9,19 +9,25 @@ class BeaconScanner:
         self.hci_number = hci_number
         self.filters = []
         self.beacon_list = {}
+        self.beacon_meta_list = {}
 
     def scan_for_time_span(self, time_span):
         sock = scanner.hci_open_dev(self.hci_number)
         result = scanner.start_scan(sock, time_span, self.on_discovery)
         return_list = []
 
-        for k, v in result.items():
+        for k, beacon_list in result.items():
             if self.debug:
-                beacon_utils.print_beacon_data(v)
+                beacon_utils.print_beacon_data(beacon_list)
 
-            temp = v[0]
-            temp.rssi = beacon_utils.calculate_average_rssi(v)
-            return_list.append(temp)
+            meta_beacon = _bmd.BeaconMetaData(beacon_list[0].uuid)
+            meta_beacon.mean = beacon_utils.calculate_rssi_mean(beacon_list)
+            meta_beacon.sd = beacon_utils.calculate_rssi_sd(beacon_list, meta_beacon.mean, True)
+            meta_beacon.tx_power = beacon_list[0].tranp
+            filtered_beacons = beacon_utils.filter_extremes(beacon_list, meta_beacon)
+            meta_beacon.rssi_filtered_mean = beacon_utils.calculate_rssi_mean(filtered_beacons)
+
+            return_list.append(meta_beacon)
 
         return return_list
 

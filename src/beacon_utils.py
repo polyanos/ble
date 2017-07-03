@@ -2,14 +2,14 @@ import math
 
 
 def calculate_distance(beacon):
-    ratio = beacon.rssi * 1.0 / beacon.tranp
+    ratio = beacon.rssi_mean * 1.0 / beacon.tx_power
     if ratio < 1.0:
         return math.pow(ratio, 10)
     else:
         return 0.89976 * math.pow(ratio, 7.7095) + 0.111
 
 
-def calculate_average_rssi(beacon_list):
+def calculate_rssi_mean(beacon_list):
     total = 0
     for item in beacon_list:
         total += (item.rssi * - 1)
@@ -20,3 +20,26 @@ def print_beacon_data(beacon_list):
     for v in beacon_list:
         print v.manf + " - " + v.uuid + " - " + str(v.rssi)
     print ""
+
+
+def calculate_rssi_sd(beacon_list, mean, is_sample):
+    temp = 0
+    for beacon in beacon_list:
+        temp += math.pow(beacon.rssi - mean, 2)
+
+    if is_sample:
+        return math.sqrt(temp / (len(beacon_list) - 1))
+    else:
+        return math.sqrt(temp / len(beacon_list))
+
+
+def filter_extremes(beacon_list, meta_data):
+    items = beacon_list.items()
+    limit = meta_data.mean - meta_data.sd * 2
+    i = 0
+    for beacon in items:
+        if beacon.rssi < limit:
+            del(items, i)
+        i += 1
+
+    return items

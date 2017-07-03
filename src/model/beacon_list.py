@@ -6,25 +6,25 @@ import collections
 
 class BeaconList(collections.Sequence):
     def __init__(self, size):
-        self.size = size
-        self.items = []
-        self.index = 0
+        self._size = size
+        self._items = []
+        self._index = 0
 
     def __getitem__(self, index):
-        return self.items[index]
+        return self._items[index]
 
     def __contains__(self, value):
-        return self.items.__contains__(value)
+        return self._items.__contains__(value)
 
     def __len__(self):
-        return len(self.items)
+        return len(self._items)
 
     def __iter__(self):
-        return self.items.__iter__()
+        return self._items.__iter__()
 
     def __str__(self):
         string = ""
-        for val in self.items:
+        for val in self._items:
             string += val + "\n"
         return string
 
@@ -35,11 +35,15 @@ class BeaconList(collections.Sequence):
         return super(BeaconList, self).count(value)
 
     def add(self, item):
-        if len(self.items) < self.size:
-            self.items.append(item)
-        elif self.index < self.size:
-            self.items[self.index] = item
+        if len(self._items) < self._size:
+            self._items.append(item)
+        elif self._index < self._size:
+            self._items[self._index] = item
         else:
-            self.index = 0
-            self.items[self.index] = item
-        self.index += 1
+            self._index = 0
+            self._items[self._index] = item
+        self._index += 1
+
+    @property
+    def items(self):
+        return self._items

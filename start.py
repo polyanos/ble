@@ -25,7 +25,9 @@ while True:
     print "Ending round " + str(round_number)
 
     for item in result:
-        print "Average rssi of " + item.uuid + " = " + str(item.rssi) + "dbm"
+        print "Data of {}".format(item.uuid)
+        print "Average rssi of {} dbm".format(item.rssi_mean)
+        print "Filtered average rssi of {} dbm".format(item.rssi_filtered_mean)
         print "Estimated distance = " + str(bu.calculate_distance(item))
 
     print ""
