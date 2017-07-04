@@ -79,5 +79,5 @@ if args.mode == 0:
 else:
     calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port)
     result = calibrator.calibrate_beacon()
-    print "The calibrated -dbm value at 1m is " + result
+    print "The calibrated -dbm value at 1m is " + str(result)
 
