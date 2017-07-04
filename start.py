@@ -51,7 +51,7 @@ class Main:
             print "Data of {}".format(item.uuid)
             print "Average rssi of {} dbm".format(item.rssi_mean)
             print "Filtered average rssi of {} dbm".format(item.rssi_filtered_mean)
-            print "Estimated distance = " + str(bu.calculate_distance(item))
+            print "Estimated distance = " + str(item.estimated_distance)
             print ""
 
         location = _tr.calculate_position(test_beacon_locations(), beacon_list)
