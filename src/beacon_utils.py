@@ -1,8 +1,8 @@
 import math
 
 
-def calculate_distance(beacon):
-    ratio = beacon.rssi_mean * 1.0 / beacon.tx_power
+def calculate_distance(rssi, tx_power):
+    ratio = rssi * 1.0 / tx_power
     if ratio < 1.0:
         return math.pow(ratio, 10)
     else:

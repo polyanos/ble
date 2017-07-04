@@ -46,11 +46,11 @@ class BeaconScanner(Thread):
 
         for k, beacon_list in self.beacon_list.items():
             meta_beacon = _bmd.BeaconMetaData(beacon_list[0].uuid)
+            meta_beacon.tx_power = beacon_list[0].tranp
             meta_beacon.rssi_mean = beacon_utils.calculate_rssi_mean(beacon_list)
             meta_beacon.rssi_sd = beacon_utils.calculate_rssi_sd(beacon_list, meta_beacon.rssi_mean, True)
-            meta_beacon.tx_power = beacon_list[0].tranp
-            filtered_beacons = beacon_utils.filter_extremes(beacon_list.items, meta_beacon)
-            meta_beacon.rssi_filtered_mean = beacon_utils.calculate_rssi_mean(filtered_beacons)
+            meta_beacon.rssi_filtered_mean = beacon_utils.calculate_rssi_mean(beacon_utils.filter_extremes(beacon_list.items, meta_beacon))
+            meta_beacon.estimated_distance = beacon_utils.calculate_distance(meta_beacon.rssi_filtered_mean, meta_beacon.tx_power)
 
             return_list.append(meta_beacon)
 
