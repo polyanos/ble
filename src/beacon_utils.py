@@ -2,7 +2,7 @@ import math
 
 
 def calculate_distance(rssi, tx_power):
-    if False:
+    if True:
         ratio = rssi * 1.0 / tx_power
         if ratio < 1.0:
             return math.pow(ratio, 10)
