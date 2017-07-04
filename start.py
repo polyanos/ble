@@ -71,13 +71,13 @@ parser.add_argument("--time_span", type=int, default=2000, help="The amount of t
 parser.add_argument("--hci_port", type=int, default=0, help="The hci port the program should use, the default value is 0")
 parser.add_argument("--mode", type=int, default=0, help="The mode this program should be run in, you can specify 0 to run in the default mode or 1 to run in calibration mode")
 parser.add_argument("--uuid", default="", help="The uuid of the beacon you want to calibrate")
-parser.parse_args()
+args = parser.parse_args()
 
-if parser.mode == 0:
-    main = Main(parser.time_span, parser.hci_port)
+if args.arg3 == 0:
+    main = Main(args.arg1, args.arg3)
     main.start_program()
 else:
-    calibrator = _bc.BeaconCalibrator(parser.uuid, parser.hci_port)
+    calibrator = _bc.BeaconCalibrator(args.arg4, args.arg2)
     result = calibrator.calibrate_beacon()
     print "The calibrated -dbm value at 1m is " + result
 
