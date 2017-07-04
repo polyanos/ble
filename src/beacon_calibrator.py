@@ -17,7 +17,10 @@ class BeaconCalibrator():
         beacon_scanner.stop()
         beacon_scanner.join(5)
 
-        return beacon_utils.calculate_rssi_mean(self.beacon_list)
+        if len(self.beacon_list) > 0:
+            return beacon_utils.calculate_rssi_mean(self.beacon_list)
+        else:
+            return 0
 
     def on_discovery(self, beacon):
         if beacon.uuid == self.uuid:
