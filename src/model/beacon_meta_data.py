@@ -5,6 +5,7 @@ class BeaconMetaData:
         self._rssi_sd = 0
         self._rssi_filtered_mean = 0
         self._tx_power = 0
+        self._estimated_distance = 0
 
     @property
     def uuid(self):
@@ -41,3 +42,11 @@ class BeaconMetaData:
     @tx_power.setter
     def tx_power(self, value):
         self._tx_power = value
+
+    @property
+    def estimated_distance(self):
+        return self._estimated_distance
+
+    @estimated_distance.setter
+    def estimated_distance(self, value):
+        self._estimated_distance = value

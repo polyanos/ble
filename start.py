@@ -1,12 +1,29 @@
 import sys
 import src.beacon_utils as bu
+import src.trilateration as _tr
+import src.model.beacon_location as _bl
 from src.beacon_scanner import BeaconScanner
+
 
 def beacon_filter(beacon):
     if beacon.manf == "cdab0215":
         return True
     else:
         return False
+
+
+def test_beacon_locations():
+    # Should come from database
+    beacon1 = _bl.BeaconLocation("1d7837fe978548daa9fa5ffe732b6f51", 1.0, 1.0)
+    beacon2 = _bl.BeaconLocation("5f6962825819435aba0dc2d1fe87deaa", 6.0, 1.0)
+    beacon3 = _bl.BeaconLocation("6d7b5ac1a4f245218799eb7afd4a30bd", 3.0, 6.0)
+    beacon_locations = {
+        beacon1.uuid: beacon1,
+        beacon2.uuid: beacon2,
+        beacon3.uuid: beacon3
+    }
+    return beacon_locations
+
 
 class Main:
     def __init__(self, time_span, hci_port_number):
@@ -36,6 +53,9 @@ class Main:
             print "Filtered average rssi of {} dbm".format(item.rssi_filtered_mean)
             print "Estimated distance = " + str(bu.calculate_distance(item))
             print ""
+
+        location = _tr.calculate_position(test_beacon_locations(), beacon_list)
+        print "Estimated location is: x = {}m; y = {}m".format(location[0], location[1])
 
     def wait_for_input(self):
         raw_input("Press a key to exit...")
