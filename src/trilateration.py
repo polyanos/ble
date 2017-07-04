@@ -2,7 +2,7 @@
 
 import src.model.beacon_location as _bl
 
-# room specs: width = 6m, height = 6m
+# room specs: width = 1.5m, height = 2m
 # beacon positions: 1m,1m;6m,1m;3m,6m
 
 def getlocation(xA, yA, zA, xB, yB, zB, xC, yC, zC):

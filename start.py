@@ -1,7 +1,10 @@
 import sys
+import argparse
 import src.beacon_utils as bu
 import src.trilateration as _tr
 import src.model.beacon_location as _bl
+import src.beacon_calibrator as _bc
+
 from src.beacon_scanner import BeaconScanner
 
 
@@ -63,15 +66,17 @@ class Main:
 
 scan_time_span = 2000
 hci_port_number = 0
-if len(sys.argv) == 2:
-    first_par = sys.argv[1]
-    if not(first_par is None):
-        scan_time_span = int(first_par)
+parser = argparse.ArgumentParser()
+parser.add_argument("--time_span", type=int, default=2000, help="The amount of time one scan round should take, the default value is 2000 milliseconds")
+parser.add_argument("--hci_port", type=int, default=0, help="The hci port the program should use, the default value is 0")
+parser.add_argument("--mode", type=int, default=0, help="The mode this program should be run in, you can specify 0 to run in the default mode or 1 to run in calibration mode")
+parser.add_argument("--uuid", default="", help="The uuid of the beacon you want to calibrate")
 
-if len(sys.argv) == 3:
-    second_par = sys.argv[2]
-    if not(second_par is None):
-        hci_port_number = int(second_par)
+if parser.mode == 0:
+    main = Main(parser.time_span, parser.hci_port)
+    main.start_program()
+else:
+    calibrator = _bc.BeaconCalibrator(parser.uuid, parser.hci_port)
+    result = calibrator.calibrate_beacon()
+    print "The calibrated -dbm value at 1m is " + result
 
-main = Main(scan_time_span, hci_port_number)
-main.start_program()

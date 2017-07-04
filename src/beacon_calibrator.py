@@ -1,0 +1,24 @@
+import scanner
+import time
+import beacon_utils
+
+
+class BeaconCalibrator():
+    def __init__(self, uuid, hci_port_number):
+        self.time_span = 10000
+        self.uuid = uuid
+        self.hci_port_number = hci_port_number
+        self.beacon_list = []
+
+    def calibrate_beacon(self):
+        beacon_scanner = scanner.LowLevelScanner(self.hci_port_number, self.on_discovery)
+        beacon_scanner.start()
+        time.sleep(self.time_span / 1000.0)
+        beacon_scanner.stop()
+        beacon_scanner.join(5)
+
+        return beacon_utils.calculate_rssi_mean(self.beacon_list)
+
+    def on_discovery(self, beacon):
+        if beacon.uuid == self.uuid:
+            self.beacon_list.append(beacon)
