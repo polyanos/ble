@@ -1,6 +1,4 @@
-import sys
 import argparse
-import src.beacon_utils as bu
 import src.trilateration as _tr
 import src.model.beacon_location as _bl
 import src.beacon_calibrator as _bc
@@ -72,6 +70,8 @@ parser.add_argument("--hci_port", type=int, default=0, help="The hci port the pr
 parser.add_argument("--mode", type=int, default=0, help="The mode this program should be run in, you can specify 0 to run in the default mode or 1 to run in calibration mode")
 parser.add_argument("--uuid", default="", help="The uuid of the beacon you want to calibrate")
 args = parser.parse_args()
+
+print str(args)
 
 if args.arg3 == 0:
     main = Main(args.arg1, args.arg3)
