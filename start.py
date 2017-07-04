@@ -73,11 +73,11 @@ args = parser.parse_args()
 
 print str(args)
 
-if args.arg3 == 0:
-    main = Main(args.arg1, args.arg3)
+if args.mode == 0:
+    main = Main(args.hci_port, args.time_span)
     main.start_program()
 else:
-    calibrator = _bc.BeaconCalibrator(args.arg4, args.arg2)
+    calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port)
     result = calibrator.calibrate_beacon()
     print "The calibrated -dbm value at 1m is " + result
 
