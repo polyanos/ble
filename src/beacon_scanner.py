@@ -10,11 +10,11 @@ class BeaconScanner(Thread):
         Thread.__init__(self)
         self.debug = True
 
-        self.hci_number = hci_number
+        self.hci_number = 0
         self.filters = []
         self.beacon_list = {}
         self.beacon_meta_list = {}
-        self.time_span = time_span
+        self.time_span = 2000
         self.callback = callback
         self.is_scanning = True
 
@@ -24,7 +24,7 @@ class BeaconScanner(Thread):
         self.scanner.start()
 
         while self.is_scanning:
-            time.sleep(2)
+            time.sleep(self.time_span / 1000.0)
             self.on_time_elapsed()
 
 
