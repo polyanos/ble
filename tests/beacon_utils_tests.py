@@ -1,8 +1,9 @@
-import unittest
 import math
-import src.model.beacon_model as _bm
+import unittest
+
 import src.beacon_utils as beacon_utils
 import src.model.beacon_meta_data as _bmd
+import src.model.beacon_model as _bm
 
 
 class BeaconUtilsTest(unittest.TestCase):
@@ -12,10 +13,10 @@ class BeaconUtilsTest(unittest.TestCase):
         beacon.rssi = -35
         beacon.tranp = -59
 
-        expected_result = math.pow(beacon.rssi * 1.0 / beacon.tranp, 10)
+        expected_result = round(math.pow(beacon.rssi * 1.0 / beacon.tranp, 10) * 100, 0)
 
         # Act
-        result = beacon_utils.calculate_distance(beacon.rssi, beacon.tranp)
+        result = beacon_utils.calculate_distance_in_centimeters(beacon.rssi, beacon.tranp)
 
         # Assert
         self.assertTrue(result == expected_result)  # ~0.00539709
@@ -26,10 +27,10 @@ class BeaconUtilsTest(unittest.TestCase):
         beacon.rssi = -75
         beacon.tranp = -59
 
-        expected_result = 0.89976 * math.pow(beacon.rssi * 1.0 / beacon.tranp, 7.7095) + 0.111
+        expected_result = round((0.89976 * math.pow(beacon.rssi * 1.0 / beacon.tranp, 7.7095) + 0.111) * 100, 0)
 
         # Act
-        result = beacon_utils.calculate_distance(beacon.rssi, beacon.tranp)
+        result = beacon_utils.calculate_distance_in_centimeters(beacon.rssi, beacon.tranp)
 
         # Assert
         self.assertTrue(result == expected_result)  # ~5.8327372

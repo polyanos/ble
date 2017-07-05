@@ -1,8 +1,9 @@
 import time
 from threading import Thread
+
 from src import beacon_utils
-from src.scanner import LowLevelScanner
 from src.model import beacon_list as _bl, beacon_meta_data as _bmd
+from src.scanner import LowLevelScanner
 
 
 class BeaconScanner(Thread):
@@ -50,7 +51,8 @@ class BeaconScanner(Thread):
             meta_beacon.rssi_mean = beacon_utils.calculate_rssi_mean(beacon_list)
             meta_beacon.rssi_sd = beacon_utils.calculate_rssi_sd(beacon_list, meta_beacon.rssi_mean, True)
             meta_beacon.rssi_filtered_mean = beacon_utils.calculate_rssi_mean(beacon_utils.filter_extremes(beacon_list.items, meta_beacon))
-            meta_beacon.estimated_distance = beacon_utils.calculate_distance(meta_beacon.rssi_filtered_mean, meta_beacon.tx_power)
+            meta_beacon.estimated_distance = beacon_utils.calculate_distance_in_centimeters(
+                meta_beacon.rssi_filtered_mean, meta_beacon.tx_power)
 
             return_list.append(meta_beacon)
 

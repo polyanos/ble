@@ -1,16 +1,12 @@
 import math
 
 
-def calculate_distance(rssi, tx_power):
-    if True:
-        ratio = rssi * 1.0 / tx_power
-        if ratio < 1.0:
-            return math.pow(ratio, 10)
-        else:
-            return 0.89976 * math.pow(ratio, 7.7095) + 0.111
+def calculate_distance_in_centimeters(rssi, tx_power):
+    ratio = rssi * 1.0 / tx_power
+    if ratio < 1.0:
+        return round(math.pow(ratio, 10) * 100, 0)
     else:
-        return math.pow(10.0, (tx_power - rssi) / (10.0 * 2.0))
-
+        return round((0.89976 * math.pow(ratio, 7.7095) + 0.111) * 100, 0)
 
 def calculate_rssi_mean(beacon_list):
     total = 0
