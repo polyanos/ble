@@ -2,8 +2,8 @@ import math
 
 
 def calculate_distance_in_centimeters(rssi, tx_power):
-    tx_power = -59
-    
+    tx_power = -54
+
     ratio = rssi * 1.0 / tx_power
 
     if ratio < 1.0:
