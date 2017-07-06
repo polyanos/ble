@@ -11,7 +11,7 @@ class BeaconScanner(Thread):
         Thread.__init__(self)
         self.debug = True
 
-        self.hci_number = int(hci_number)
+        self.hci_number = 0
         self.filters = []
         self.beacon_list = {}
         self.beacon_meta_list = {}
