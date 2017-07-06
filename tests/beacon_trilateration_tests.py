@@ -39,11 +39,11 @@ class TrilaterationTests(unittest.TestCase):
                             beacon3.uuid: beacon3}
 
         beacon_meta_1 = _bmd.BeaconMetaData("1d7837fe978548daa9fa5ffe732b6f51")
-        beacon_meta_1.estimated_distance = 214.0
+        beacon_meta_1.estimated_distance = 101.0
         beacon_meta_2 = _bmd.BeaconMetaData("5f6962825819435aba0dc2d1fe87deaa")
-        beacon_meta_2.estimated_distance = 101.0
+        beacon_meta_2.estimated_distance = 167.0
         beacon_meta_3 = _bmd.BeaconMetaData("6d7b5ac1a4f245218799eb7afd4a30bd")
-        beacon_meta_3.estimated_distance = 214.0
+        beacon_meta_3.estimated_distance = 167.0
         used_beacons = [beacon_meta_1, beacon_meta_2, beacon_meta_3]
 
         # Act

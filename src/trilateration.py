@@ -77,6 +77,9 @@ def calculate_position(beacon_locations, used_beacons):
 
     # Sort the list to use the closest 3 points
     sorted_beacons = sorted(used_beacons, key=lambda x: x.rssi_filtered_mean, reverse=False)
+    for i in sorted_beacons:
+        print beacon_locations[i.uuid].west_distance, beacon_locations[i.uuid].north_distance, i.estimated_distance
+
 
     # starting x,y, and z(radius is the RSSI of beacon) locations of circles
     circle1 = _c.BeaconCirlce(beacon_locations[sorted_beacons[0].uuid].west_distance,
