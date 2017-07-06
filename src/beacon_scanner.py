@@ -43,7 +43,7 @@ class BeaconScanner(Thread):
             if beacon.uuid in self.beacon_list:
                 self.beacon_list[beacon.uuid].add(beacon)
             else:
-                self.beacon_list[beacon.uuid] = _bl.BeaconList(int(self.time_span / 100))
+                self.beacon_list[beacon.uuid] = _bl.BeaconList(100)
 
     def on_time_elapsed(self):
         return_list = []
