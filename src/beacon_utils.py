@@ -36,7 +36,7 @@ def calculate_rssi_sd(beacon_list, mean, is_sample):
 
 
 def filter_extremes(list, meta_data):
-    limit = meta_data.rssi_mean - meta_data.rssi_sd * 2
+    limit = meta_data.rssi_mean - meta_data.rssi_sd * 1.5
     index = 0
 
     for beacon in list:
