@@ -11,11 +11,11 @@ class BeaconScanner(Thread):
         Thread.__init__(self)
         self.debug = True
 
-        self.hci_number = 0
+        self.hci_number = int(hci_number)
         self.filters = []
         self.beacon_list = {}
         self.beacon_meta_list = {}
-        self.time_span = 2000
+        self.time_span = time_span
         self.callback = callback
         self.is_scanning = True
 
@@ -25,7 +25,7 @@ class BeaconScanner(Thread):
         self.scanner.start()
 
         while self.is_scanning:
-            time.sleep(self.time_span / 1000.0)
+            time.sleep(self.time_span / 1000)
             self.on_time_elapsed()
 
 
@@ -40,7 +40,7 @@ class BeaconScanner(Thread):
             if beacon.uuid in self.beacon_list:
                 self.beacon_list[beacon.uuid].add(beacon)
             else:
-                self.beacon_list[beacon.uuid] = _bl.BeaconList(20)
+                self.beacon_list[beacon.uuid] = _bl.BeaconList(int(self.time_span / 100))
 
     def on_time_elapsed(self):
         return_list = []
