@@ -62,8 +62,6 @@ class Main:
         raw_input("Press a key to exit...")
         return False
 
-scan_time_span = 2000
-hci_port_number = 0
 parser = argparse.ArgumentParser()
 parser.add_argument("--time_span", type=int, default=2000, help="The amount of time one scan round should take, the default value is 2000 milliseconds")
 parser.add_argument("--hci_port", type=int, default=0, help="The hci port the program should use, the default value is 0")
@@ -72,20 +70,17 @@ parser.add_argument("--uuid", default="", help="The uuid of the beacon you want 
 args = parser.parse_args()
 
 print str(args)
-
+time_span = int(args.time_span)
+hci_port_number = int(args.hci_port)
 if args.mode == 0:
-    if args.time_span < 1000:
+    if time_span < 1000:
         time_span = 1000
-    else:
-        time_span = args.time_span
 
-    main = Main(args.hci_port, args.time_span)
+    main = Main(hci_port_number, time_span)
     main.start_program()
 else:
-    if args.time_span < 10000:
+    if time_span < 10000:
         time_span = 10000
-    else:
-        time_span = args.time_span
 
     calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port, time_span)
     result = calibrator.calibrate_beacon()
