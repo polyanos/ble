@@ -4,7 +4,7 @@ import math
 def calculate_distance_in_centimeters(rssi, tx_power):
     ratio = rssi * 1.0 / tx_power
 
-    return 10 ^ ((tx_power - rssi) / 20)
+    return math.pow(((tx_power - rssi) / 20), 10)
     if ratio < 1.0:
         return round(math.pow(ratio, 10) * 100, 0)
     else:
