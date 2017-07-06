@@ -4,8 +4,8 @@ import beacon_utils
 
 
 class BeaconCalibrator():
-    def __init__(self, uuid, hci_port_number):
-        self.time_span = 10000
+    def __init__(self, uuid, hci_port_number, time_span):
+        self.time_span = time_span
         self.uuid = uuid
         self.hci_port_number = hci_port_number
         self.beacon_list = []

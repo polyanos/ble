@@ -87,7 +87,7 @@ else:
     else:
         time_span = args.time_span
 
-    calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port, )
+    calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port, time_span)
     result = calibrator.calibrate_beacon()
     print "The calibrated -dbm value at 1m is " + str(result)
 
