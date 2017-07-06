@@ -27,7 +27,8 @@ class BeaconScanner(Thread):
         while self.is_scanning:
             scanner_time_span = self.time_span / 1000
             print scanner_time_span
-            time.sleep(10000)
+            self.time_span = 10000
+            time.sleep(self.time_span / 1000)
             self.on_time_elapsed()
 
 
