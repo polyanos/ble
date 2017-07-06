@@ -110,9 +110,9 @@ def calculate_position(beacon_locations, used_beacons):
     p2 = point(1.21, 0.69)
     p3 = point(0.87, 0.84)
 
-    c11 = circle(p1, 0.70)
-    c22 = circle(p2, 0.51)
-    c33 = circle(p3, 0.63)
+    c1 = circle(p1, 0.70)
+    c2 = circle(p2, 0.51)
+    c3 = circle(p3, 0.63)
 
     circle_list = [c1, c2, c3]
 
