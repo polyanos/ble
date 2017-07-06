@@ -17,7 +17,7 @@ def test_beacon_locations():
     # Should come from database
     beacon1 = _bl.BeaconLocation("1d7837fe978548daa9fa5ffe732b6f51", 66.0, 180.0)
     beacon2 = _bl.BeaconLocation("5f6962825819435aba0dc2d1fe87deaa", 187.0, 90.0)
-    beacon3 = _bl.BeaconLocation("6d7b5ac1a4f245218799eb7afd4a30bd", 200.0, 348.0)
+    beacon3 = _bl.BeaconLocation("6d7b5ac1a4f245218799eb7afd4a30bd", 318.0, 387.0)
     beacon_locations = {
         beacon1.uuid: beacon1,
         beacon2.uuid: beacon2,
