@@ -1,5 +1,5 @@
 import argparse
-import src.trilateration2 as _tr
+import src.trilateration as _tr
 import src.model.beacon_location as _bl
 import src.beacon_calibrator as _bc
 
