@@ -74,10 +74,20 @@ args = parser.parse_args()
 print str(args)
 
 if args.mode == 0:
+    if args.time_span < 1000:
+        time_span = 1000
+    else:
+        time_span = args.time_span
+
     main = Main(args.hci_port, args.time_span)
     main.start_program()
 else:
-    calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port)
+    if args.time_span < 10000:
+        time_span = 10000
+    else:
+        time_span = args.time_span
+
+    calibrator = _bc.BeaconCalibrator(args.uuid, args.hci_port, )
     result = calibrator.calibrate_beacon()
     print "The calibrated -dbm value at 1m is " + str(result)
 
